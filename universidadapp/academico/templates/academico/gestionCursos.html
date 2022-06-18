@@ -1,12 +1,13 @@
 {% extends './base.html' %}
-{% block title %}Gestión de Cursos{% endblock  %}
+
+{% block title %} Gestión de Cursos {% endblock  %}
 
 {% block body %}
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
         <h2>Gestión de Cursos</h2>
         <div class="card">
-            <div class="car-body">
+            <div class="card-body">
                 <form action="/registrarCurso/" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Código" minlength="6" maxlength="6" required>
@@ -30,17 +31,22 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Créditos</th>
+                        <th colspan="2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for c in cursos %}
                         <tr>
+                            <th>{{ forloop.counter }}</th>
                             <td>{{ c.codigo }}</td>
                             <td>{{ c.nombre }}</td>
                             <td>{{ c.creditos }}</td>
+                            <td><a href="edicionCurso/{{c.codigo}}" class="btn btn-info">Editar</a></td>
+                            <td><a href="eliminarCurso/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
